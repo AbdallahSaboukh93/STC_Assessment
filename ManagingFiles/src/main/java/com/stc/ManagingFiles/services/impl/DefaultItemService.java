@@ -7,12 +7,14 @@ import org.springframework.stereotype.Service;
 
 import com.stc.ManagingFiles.dto.ItemDto;
 import com.stc.ManagingFiles.dto.PermissionDto;
+import com.stc.ManagingFiles.entities.File;
 import com.stc.ManagingFiles.entities.Item;
 import com.stc.ManagingFiles.entities.Permission;
 import com.stc.ManagingFiles.entities.PermissionGroup;
+import com.stc.ManagingFiles.enums.ItemType;
+import com.stc.ManagingFiles.repositories.FileRepository;
 import com.stc.ManagingFiles.repositories.ItemRepository;
 import com.stc.ManagingFiles.repositories.PermissionGroupRepository;
-import com.stc.ManagingFiles.repositories.PermissionRepository;
 import com.stc.ManagingFiles.services.ItemService;
 
 @Service
@@ -21,11 +23,14 @@ public class DefaultItemService implements ItemService {
 	@Autowired
 	private ItemRepository itemRepository;
 
-	@Autowired
-	private PermissionRepository permissionRepository;
+	//@Autowired
+	//private PermissionRepository permissionRepository;
 
 	@Autowired
 	private PermissionGroupRepository permissionGroupRepository;
+	
+	@Autowired
+	private FileRepository fileRepository ;
 
 	@Transactional
 	public Item createItem(ItemDto itemDto) {
@@ -37,7 +42,17 @@ public class DefaultItemService implements ItemService {
 		Item item = new Item();
 		item.setName(itemDto.getName());
 		item.setPermissionGroup(permissionGroup);
+		createFile(itemDto, item);
 		return itemRepository.save(item);
+	}
+
+	private void createFile(ItemDto itemDto, Item item) {
+		if(itemDto.getType()==ItemType.FILE.getItemType()) {
+			File file =new File() ;
+			file.setItem(item);
+			file.setBinary(itemDto.getBinary());
+			fileRepository.save(file) ;
+		}
 	}
 
 	private PermissionGroup createPermissions(ItemDto itemDto) {

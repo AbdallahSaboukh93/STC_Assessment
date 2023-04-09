@@ -19,6 +19,8 @@ public class ItemDto implements Serializable{
 	private String name;
 	
 	private Long parentItemId;
+	
+	private byte[] binary;
 
 	private PermissionGroupDto permissionGroup;
 }

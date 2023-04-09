@@ -1,7 +1,9 @@
 package com.stc.ManagingFiles.enums;
 
 public enum ItemType {
-	SPACE("SPACE");
+	SPACE("SPACE"),
+	FOLDER("FOLDER"),
+	FILE("FILE");
    // SPACE,
    // FOLDER,
    // FILE

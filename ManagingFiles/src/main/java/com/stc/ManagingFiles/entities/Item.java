@@ -36,7 +36,7 @@ public class Item implements Serializable {
 	private String name;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "parent_item_id")
+	@JoinColumn(name = "item_id")
 	private Item parentItem;
 
 	@ManyToOne(fetch = FetchType.LAZY)
