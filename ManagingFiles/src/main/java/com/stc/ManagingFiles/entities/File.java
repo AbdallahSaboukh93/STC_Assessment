@@ -1,6 +1,8 @@
 package com.stc.ManagingFiles.entities;
 
 import java.io.Serializable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -27,8 +29,8 @@ public class File implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Lob
-	private byte[] binary;
+
+	private String binaryq;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "item_id")

@@ -19,7 +19,7 @@ public class ItemController {
 	private ItemService itemService;
 
 	@PostMapping("/item")
-	public ResponseEntity<Item> createItem(@RequestBody ItemDto itemDto) {
+	public ResponseEntity<Long> createItem(@RequestBody ItemDto itemDto) {
 		return ResponseEntity.ok(itemService.createItem(itemDto));
 	}
 }

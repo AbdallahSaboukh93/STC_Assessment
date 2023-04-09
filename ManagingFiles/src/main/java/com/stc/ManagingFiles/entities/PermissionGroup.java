@@ -29,8 +29,8 @@ public class PermissionGroup implements Serializable {
 
 	private String groupName;
 
-	@OneToMany(mappedBy = "permissionGroup")
-	private List<Item> items;
+	//@OneToMany(mappedBy = "permissionGroup")
+	//private List<Item> items;
 	
 	@OneToMany(mappedBy = "permissionGroup")
 	private List<Permission> Permissions;

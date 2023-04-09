@@ -30,13 +30,12 @@ public class Item implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Enumerated(EnumType.STRING)
-	private ItemType type;
+	private String type;
 
 	private String name;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "item_id")
+	@JoinColumn(name = "parent_item_id")
 	private Item parentItem;
 
 	@ManyToOne(fetch = FetchType.LAZY)
