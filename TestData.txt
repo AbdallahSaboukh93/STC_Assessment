@@ -1,0 +1,69 @@
+create space 
+
+curl --location 'http://localhost:8081/api/item' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "type": "SPACE",
+    "name": "stc-assessments",
+    "permissionGroup": {
+        "groupName": "admin",
+        "permissions": [
+            {
+                "userEmail": "abdalla@gmail.com",
+                "permissionLevel": "VIEW"
+            } ,
+              {
+                "userEmail": "abdalla@gmail.com",
+                "permissionLevel": "EDIT"
+            }
+        ]
+    }
+}'
+
+
+--------------------------------------------
+create folder 
+
+curl --location 'http://localhost:8081/api/item' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "type": "FOLDER",
+    "name": "backend",
+	"parentItemId": 1,
+    "permissionGroup": {
+        "groupName": "EDIT",
+        "permissions": [
+            {
+                "userEmail": "abdalla3@gmail.com",
+                "permissionLevel": "EDIT"
+            } 
+        ]
+    }
+}'
+
+
+----------------------------------------
+create file 
+
+curl --location 'http://localhost:8081/api/item' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "type": "FILE",
+    "name": "ssessment.pdf",
+    "parentItemId": 2,
+    "binary": [
+        3,
+        10,
+        8,
+        25
+    ],
+    "permissionGroup": {
+        "groupName": "EDIT",
+        "permissions": [
+            {
+                "userEmail": "abdalla4@gmail.com",
+                "permissionLevel": "EDIT"
+            }
+        ]
+    }
+}'
