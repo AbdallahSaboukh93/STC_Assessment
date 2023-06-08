@@ -10,3 +10,22 @@ WHERE DATE(td.training_date) IN (
 GROUP BY u.user_id, td.training_id, DATE(td.training_date)
 HAVING COUNT(*) > 1
 ORDER BY td.training_date DESC;
+
+------------------------------
+optimized query :
+ to eliminate the subquery and make use of a self-join instead. This approach avoids the need for a nested subquery and improves the overall performance.
+
+SELECT u.user_id, u.username, td.training_id, td.training_date, COUNT(*) AS count
+FROM User u
+JOIN Training_details td ON u.user_id = td.user_id
+JOIN (
+    SELECT user_id, training_id, DATE(training_date) AS training_date
+    FROM Training_details
+    GROUP BY user_id, training_id, DATE(training_date)
+    HAVING COUNT(*) > 1
+) AS td2 ON td.user_id = td2.user_id
+    AND td.training_id = td2.training_id
+    AND DATE(td.training_date) = td2.training_date
+GROUP BY u.user_id, td.training_id, DATE(td.training_date)
+HAVING COUNT(*) > 1
+ORDER BY td.training_date DESC;
